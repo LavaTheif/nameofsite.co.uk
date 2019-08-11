@@ -8,7 +8,7 @@ fetch('https://www.reddit.com/r/'+sub+'/'+sort+'.json?limit=100').then(function(
         res = res.data.children;
         let image;
 
-        while(!image){
+        while(!image){//probs shouldnt use while
             image = post.url.includes('/r/')?null:post.url;
         }
         let post = res[Math.floor(Math.random()*res.length)].data;
