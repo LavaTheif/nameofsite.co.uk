@@ -7,11 +7,11 @@ fetch('https://www.reddit.com/r/'+sub+'/'+sort+'.json?limit=100').then(function(
     res.json().then(function(res){
         res = res.data.children;
         let image;
-
-        while(!image){//probs shouldnt use while
+        let post;
+        while(!image){
+            post = res[Math.floor(Math.random()*res.length)].data;
             image = post.url.includes('/r/')?null:post.url;
         }
-        let post = res[Math.floor(Math.random()*res.length)].data;
         let url = "https://www.reddit.com"+post.permalink;
         let title = post.title;
         let poster = "u/"+post.author;
