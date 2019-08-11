@@ -19,7 +19,7 @@ fetch('https://www.reddit.com/r/'+sub+'/'+sort+'.json?limit=100').then(function(
         let created = post.created*1000;
         let upvotes = post.ups;
 
-        $('#page').append(`<a href="${url}">${title}</a> by ${poster} at ${new Date(created).getTime()}<br><br><img src=image><br><br>${upvotes} upvotes.`)
+        $('#page').append(`<a href="${url}">${title}</a> by ${poster} at ${new Date(created).getTime()}<br><br><img src=${image}><br><br>${upvotes} upvotes.`)
     });
 });
 </script>
