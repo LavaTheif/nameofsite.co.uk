@@ -3,22 +3,24 @@
 <script>
 let sub = "memes";
 let sort = "hot";
-fetch('https://www.reddit.com/r/'+sub+'/'+sort+'.json?limit=100', function(res){
-    res = res.data.children;
-    let image;
+fetch('https://www.reddit.com/r/'+sub+'/'+sort+'.json?limit=100').then(function(res){
+    res.json().then(function(res){
+        res = res.data.children;
+        let image;
 
-    while(!image){
-        image = post.url.includes('/r/')?null:post.url;
-    }
-    let post = res[Math.floor(Math.random()*res.length)].data;
-    let url = "https://www.reddit.com"+post.permalink;
-    let title = post.title;
-    let poster = "u/"+post.author;
+        while(!image){
+            image = post.url.includes('/r/')?null:post.url;
+        }
+        let post = res[Math.floor(Math.random()*res.length)].data;
+        let url = "https://www.reddit.com"+post.permalink;
+        let title = post.title;
+        let poster = "u/"+post.author;
 
-    let created = post.created*1000;
-    let upvotes = post.ups;
+        let created = post.created*1000;
+        let upvotes = post.ups;
 
-    $('#page').append(`<a href="${url}">${title}</a> by ${poster} at ${new Date(created).getTime()}<br><br><img src=image><br><br>${upvotes} upvotes.`)
+        $('#page').append(`<a href="${url}">${title}</a> by ${poster} at ${new Date(created).getTime()}<br><br><img src=image><br><br>${upvotes} upvotes.`)
+    });
 });
 </script>
 <div id="page">
