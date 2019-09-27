@@ -10,7 +10,7 @@ async function get(dat, send) {
       alert("Sever is taking a while to connect.  Maybe try reloading the page?");
       throw new Error("timeout");
     }}, 10000);
-    data = await fetch(url + "/API/" + dat + ".json", {method:'POST', headers: {"jwt": "testing"}, body:send});
+    data = await fetch(url + "/API/" + dat + ".json", {method:'POST', headers: {"jwt": "testing"}, body:JSON.stringify(send)});
   }catch(error){
     alert("Unable to contact the server.  Please try again later.");
     throw error;

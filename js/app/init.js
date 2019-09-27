@@ -22,8 +22,8 @@ async function loadData(){
 
 async function openTask(id){
   let taskData = await get('subtasks');
-  $('#task-name').val(taskData.tasks.name).prop('disabled', false);
-  $('#task-desc').val(taskData.tasks.desc).prop('disabled', false);
+  $('#task-name').val(taskData.tasks.title).prop('disabled', false);
+  $('#task-desc').val(taskData.tasks.details).prop('disabled', false);
 
 }
 
@@ -92,9 +92,8 @@ function selectBoard(id){
 
 }
 
-let urlParams = window.location.href.replace(/.*\?/,"").split('&');
-
 function getUrlID(){
+  let urlParams = window.location.href.replace(/.*\?/,"").split('&');
   let viewing;
   //check each of the paramaters
   for(let i = 0; i < urlParams.length; i++){

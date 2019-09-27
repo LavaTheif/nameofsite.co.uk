@@ -37,7 +37,9 @@ async function sideBarDetails(){
   let data = getBoardData();
 
   if(!data){
-    data = await get("board")
+    let boardDat = await get('userBoards');
+    saveSess('boards', boardDat);
+    data = getBoardData();
   }
 
   $('#board-name').val(data.name);
@@ -62,7 +64,7 @@ function renderSideBarTasksStage(mode){
   let arr = taskDat.tasks;
   for(let i in arr){
     let data = arr[i];
-    if(mode === data.stage+1)
+    if(mode === data.status+1)
       renderSideBarTask(data);
   }
 }
@@ -72,17 +74,22 @@ function renderSideBarTask(data){
   let sidebarViewport = $('#mini-task-container');
 
   sidebarViewport.append(`
-    <div class="task ${colours[data.stage]}" id="${data.id}" onclick="openTask('${data.id}')">
-    <div class="task-name">${data.name}</div>
-    <div class="task-desc">${data.desc}</div>
+    <div class="task ${colours[data.status]}" id="${data.task_id}" onclick="openTask('${data.task_id}')">
+    <div class="task-name">${data.title}</div>
+    <div class="task-desc">${data.details}</div>
     </div>
     `);
 
 }
 
 async function sideBarTasks(){
-  let taskDat = await get('board');
-  saveSess('taskDat', taskDat);
+  let data = await get("board", {board_id: getUrlID()});
+  if(!data.exists){
+    menu(getSessJSON('boards'));
+    alert("Board not found.");
+    return;
+  }
+  saveSess('taskDat', data);
   updateSidebarFilter();
 }
 
