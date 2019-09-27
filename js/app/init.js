@@ -76,7 +76,7 @@ function getSessJSON(key){
 function selectBoard(id){
   let data = getBoardData(id);
   if(!data){
-    menu(dataGlobal);
+    menu(getSessJSON('boards'));
     alert("Board not found.");
     return;
   }
