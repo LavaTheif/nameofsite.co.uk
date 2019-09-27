@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>Home</title>
-  <script src="js/vendor/jquery-3.4.1.min.js"></script>
-  <script src="js/init_page.js"></script>
+  <script src="../js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="../js/init_page.js"></script>
 
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body class="background">
@@ -17,36 +17,32 @@
 
 <!--  <div class="header">-->
 <!--    <h3>Welcome to [NAME OF SITE]</h3>-->
-<!--    <div id="login-icon" onclick="window.location.href='./login/'"></div>-->
+<!--    <div id="login-icon" onclick="window.location.href='../login/'"></div>-->
 <!--  </div>-->
 
   <div class="btn-container">
-    <div class="btn-1" onclick="window.location.href='./'"><br>Home</div>
-    <div class="btn-1" onclick="window.location.href='./about/'"><br>About</div>
-    <div class="btn-1" onclick="window.location.href='./contact/'"><br>Contact</div>
+    <div class="btn-1" onclick="window.location.href='../'"><br>Home</div>
+    <div class="btn-1" onclick="window.location.href='../about/'"><br>About</div>
+    <div class="btn-1" onclick="window.location.href='../contact/'"><br>Contact</div>
   </div>
 
   <div id="container-1-top">
     <h1 style="text-shadow: 0 0 15px gainsboro">[NAME OF SITE]</h1>
     <h4>Task planner and organiser</h4>
   </div>
-  <div id="container-1">
-    <div class="spacer"></div>
-    Have you ever had a huge list of tasks you need to do but have no idea where to start?<br>
-    Are you getting stressed out by by all the homework you need to do?<br>
-    Do you forget things easily and need a single place to keep track of it all?<br>
-    <br>
-    <h3>Well worry no more!</h3>
-    with [NAME OF SITE] you can keep track of everything in a single place and easily plan how
-    you will tackle big problems in small simple steps.
+  <div id="container-2">
+    <div class="spacer"></div><br><br>
+    TODO: Login
+    TODO: Terms
+    TODO: Privacy Policy
   </div>
   <script>
     $(window).resize(res);
     function res(){
-      let c1 = $('#container-1');
+      let c1 = $('#container-2');
       let c2 = $('#container-1-top');
       c1.css('margin-left','calc(50% - (750px / 2))');
-      // console.log(c1.css('margin-left'))
+      // console.log(c1.css('margin-left'));
       if(Number(c1.css('margin-left').replace("px","")) < 0){
         c1.css('margin-left',0);
         c2.css('margin-left',0);

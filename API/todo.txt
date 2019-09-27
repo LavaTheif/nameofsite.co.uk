@@ -1,0 +1,32 @@
+request page /API/endpoints/*.json
+get headers, needs username, id and token where token is the login token for the account.
+
+if all data matches, then query the database and return the valid JSON data.  if there is an error, return invalid.json.
+
+build pages with JS??? maybe add the taskbar to the initPage.js
+
+---------------------------------------------------
+#######################app#########################
+---------------------------------------------------
+
+init.js --> get user data, which checks if the login is valid.
+	--> load users boards
+
+--> allow users to select a board, and get the board data.
+
+
+--> we need to make a post function under the get function to save data to the db
+
+--> should we have a seperate screen for when there is no board selected? This could also be used to change the current board
+
+
+|select board|					|
+|------------|					|
+|	     |					|
+|tasks	     |	subtasks to complete here	|
+|	     |	organised into a flowchart with |
+|to	     |	options for multiple children   |
+|	     |	on each of the subtask nodes	|
+|complete    |					|
+|	     |					|
+

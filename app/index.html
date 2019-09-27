@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <script src="../js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="../js/init_page.js"></script>
+  <script src="../js/app/queryAPI.js"></script>
+  <script src="../js/app/init.js"></script>
+  <script src="../js/app/listeners.js"></script>
+  <script src="../js/app/sidebarViewManager.js"></script>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body class="background">
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <div id="darken" class="hidden">
+    <div class="message-box hidden" id="message-box-loading">
+      Loading...
+    </div>
+
+    <div class="message-box hidden" id="message-box">
+      <p id="message-box-text"></p>
+      <button id="message-box-button" onclick="hideOverlay(this)">ok</button>
+    </div>
+  </div>
+
+  <div class="layer-1" id="select-board-menu" style="display: none;">
+      <div id="contacts"></div>
+      <div id="board-select">
+        <div class="board" id="12345678">
+          <div class="board-icon"></div>
+          <p class="board-name">LavaTheif's Test Board</p>
+        </div>
+      </div>
+  </div>
+
+  <div class="layer-0" style="display: none;" id="tasks-minified-box">
+    <div class="container-header">
+      <select id="board">
+        <option value="0">View: Board Details</option>
+        <option value="1">View: Task List</option>
+        <option value="2">View: Settings</option>
+      </select>
+      <div class="vertical-divider-full"></div>
+      <select id="filter">
+        <option value="0">All</option>
+        <option value="1">TODO</option>
+        <option value="2">WIP</option>
+        <option value="3">Done</option>
+      </select>
+    </div>
+    <div class="spacer" style="margin-top: 0; margin-bottom: 0"></div>
+    <div id="mini-task-container-cont">
+      <div class="sub-container" id="mini-task-container">
+  <!--      Tasks here      -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="layer-0" style="display: none;" id="task-info-box">
+    <div class="container-header">
+      <div style="width: calc(100% - 40px);">Details</div>
+    </div>
+    <div class="spacer" style="margin-top: 0; margin-bottom: 0"></div>
+    <div class="sub-container" id="task-info-container">
+      <div id="task-details">
+        <br>Name<br><input id="task-name"><br>
+        <br>Description<br><textarea id="task-desc"></textarea>
+      </div>
+      <div class="vertical-divider"></div>
+      <div id="subtasks"></div>
+    </div>
+  </div>
+
+<!--  <script>-->
+<!--    $(window).resize(res);-->
+<!--    function res(){-->
+<!--      let c1 = $('#container-2');-->
+<!--      let c2 = $('#container-1-top');-->
+<!--      c1.css('margin-left','calc(50% - (750px / 2))');-->
+<!--      // console.log(c1.css('margin-left'));-->
+<!--      if(Number(c1.css('margin-left').replace("px","")) < 0){-->
+<!--        c1.css('margin-left',0);-->
+<!--        c2.css('margin-left',0);-->
+<!--      }else{-->
+<!--        c1.css('margin-left','calc(50% - (750px / 2))');-->
+<!--        c2.css('margin-left','calc(50% - (750px / 2))');-->
+<!--      }-->
+<!--    }-->
+<!--    res();-->
+<!--  </script>-->
+
+</body>
+
+</html>
+
+<!--<script>-->
+<!--  //TODO: Remove, this is for the dev build-->
+<!--  let last_x, last_y;-->
+<!--  let mx, my;-->
+<!--  let cooldown=1, loop=0;-->
+<!--  setInterval(function() {-->
+<!--    if (mx === last_x && my === last_y && loop%cooldown===0) {-->
+<!--      window.location.href = ".";-->
+<!--    }else {-->
+<!--      last_x = mx;-->
+<!--      last_y = my;-->
+<!--      cooldown = 10;-->
+<!--    }-->
+<!--    loop++;-->
+<!--  }, 1000);-->
+<!--  function getMousePos(event){-->
+<!--    mx = event.x;-->
+<!--    my = event.y;-->
+<!--  }-->
+
+<!--  document.onmousemove = getMousePos;-->
+<!--</script>-->
