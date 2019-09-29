@@ -27,13 +27,19 @@ function resetSidebar(){
   updateSidebarView();
 }
 
+function saveDetails(){
+  get('updateBoard', {board_id: getUrlID(), board_name: $('#board-name').val(), board_desc: $('#board-desc').val()}).then((data) => {
+    $('#board-name').val(data.board_name);
+    $('#board-desc').val(data.board_desc);
+  })
+}
 
 async function sideBarDetails(){
   let sidebarViewport = $('#mini-task-container');
-  sidebarViewport.html(`<input id="board-name">
+  sidebarViewport.html(`<input id="board-name" maxlength="25" onfocusout="saveDetails()">
       <br>
       <br>
-      <textarea id="board-desc"></textarea>`);
+      <textarea id="board-desc" maxlength="252" onfocusout="saveDetails()"></textarea>`);
   let data = getBoardData();
 
   if(!data){
@@ -49,7 +55,7 @@ async function sideBarDetails(){
 
 function renderSideBarTasks(mode){
   let sidebarViewport = $('#mini-task-container');
-  sidebarViewport.html("<u style='position:sticky;'>Tasks</u>");
+  sidebarViewport.html("<u style='position:sticky;'>Categories</u>");
   if(mode === 0){
     renderSideBarTasksStage(1);
     renderSideBarTasksStage(2);
@@ -84,11 +90,6 @@ function renderSideBarTask(data){
 
 async function sideBarTasks(){
   let data = await get("board", {board_id: getUrlID()});
-  if(!data.exists){
-    menu(getSessJSON('boards'));
-    alert("Board not found.");
-    return;
-  }
   saveSess('taskDat', data);
   updateSidebarFilter();
 }

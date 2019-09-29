@@ -160,3 +160,19 @@ function hideOverlay(btn){
   $('#darken').removeClass("show").addClass("hidden");
   $(btn).parent().removeClass("show").addClass("hidden");
 }
+
+function createCategory(){
+  get('createCategory',{board_id: getUrlID()}).then((data) => {
+    if(data.success)
+      sideBarTasks();
+    else
+      alert(data.msg);
+  })
+}
+function createBoard(){
+  get('createBoard').then(async (data) => {
+    let boardDat = await get('userBoards');
+    saveSess('boards', boardDat);
+    selectBoard(data.id);
+  })
+}

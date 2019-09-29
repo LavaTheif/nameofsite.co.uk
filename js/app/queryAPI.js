@@ -19,5 +19,11 @@ async function get(dat, send) {
   if(data.error){
     window.location = site+'/login/?msg='+data.message;
   }
+  if(data.success === false){
+    if(data.close)
+      menu(getSessJSON('boards'));
+    alert(data.msg);
+    throw new Error("invalid request");
+  }
   return data;
 }
