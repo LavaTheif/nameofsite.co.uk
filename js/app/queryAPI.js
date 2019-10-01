@@ -1,8 +1,8 @@
-let url = "http://192.168.0.15:8079";
-let site = "http://192.168.0.23:8080/ComputingProject";
+// let url = "http://192.168.0.15:8079";
+// let site = "http://192.168.0.23:8080/nameofsite.co.uk";
 
-// let url = "http://localhost:8080/ComputingProject/";
-// let site = "http://localhost:8080/ComputingProject";
+let url = "http://localhost:8079";
+let site = "http://localhost:8080/nameofsite.co.uk";
 async function get(dat, send) {
   let data;
   try{
@@ -10,7 +10,7 @@ async function get(dat, send) {
       alert("Sever is taking a while to connect.  Maybe try reloading the page?");
       throw new Error("timeout");
     }}, 10000);
-    data = await fetch(url + "/API/" + dat + ".json", {method:'POST', headers: {"jwt": "testing"}, body:JSON.stringify(send)});
+    data = await fetch(url + "/API/" + dat + ".json", {method:'POST', /*headers: {"jwt": "testing"},*/ body:JSON.stringify(send)});
   }catch(error){
     alert("Unable to contact the server.  Please try again later.");
     throw error;

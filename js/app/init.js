@@ -22,6 +22,7 @@ async function loadData(){
 
 async function openTask(id){
   let taskData = await get('subtasks');
+  window.history.pushState("", data.name, "&task="+id);
   $('#task-name').val(taskData.title).prop('disabled', false);
   $('#task-desc').val(taskData.details).prop('disabled', false);
 
@@ -92,8 +93,27 @@ function selectBoard(id){
 
 }
 
+function getUrlParams(){
+  return  window.location.href.replace(/.*\?/,"").split('&');
+}
+
+function getUrlTask(){
+  let urlParams = getUrlParams();
+  let viewing;
+  //check each of the paramaters
+  for(let i = 0; i < urlParams.length; i++){
+    let p = urlParams[i];
+    //if it matches "view=" followed by an 8 digit ID, set the viewing variable to that id.
+    if(p.match(/^task=[0-9].$/)){
+      viewing = p.replace(/task=/,"");
+      break;
+    }
+  }
+  return viewing;
+}
+
 function getUrlID(){
-  let urlParams = window.location.href.replace(/.*\?/,"").split('&');
+  let urlParams = getUrlParams();
   let viewing;
   //check each of the paramaters
   for(let i = 0; i < urlParams.length; i++){
@@ -101,6 +121,7 @@ function getUrlID(){
     //if it matches "view=" followed by an 8 digit ID, set the viewing variable to that id.
     if(p.match(/^view=[a-zA-Z0-9]{8}$/)){
       viewing = p.replace(/view=/,"");
+      break;
     }
   }
   return viewing;

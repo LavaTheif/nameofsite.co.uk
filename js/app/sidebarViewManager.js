@@ -24,7 +24,10 @@ function updateSidebarFilter(){
 function resetSidebar(){
   $('#board').val(0);
   $('#filter').val(0);
-  updateSidebarView();
+  if(!getUrlTask())
+    updateSidebarView();
+  else
+    openTask(getUrlTask());
 }
 
 function saveDetails(){
@@ -57,7 +60,9 @@ function renderSideBarTasks(mode){
   let sidebarViewport = $('#mini-task-container');
   sidebarViewport.html("<u style='position:sticky;'>Categories</u>");
   if(mode === 0){
-    renderSideBarTasksStage(1);
+    let empty = renderSideBarTasksStage(1);
+    if(empty)
+        return;
     renderSideBarTasksStage(2);
     renderSideBarTasksStage(3);
   }else{
@@ -68,6 +73,10 @@ function renderSideBarTasks(mode){
 function renderSideBarTasksStage(mode){
   let taskDat = getSessJSON('taskDat');
   let arr = taskDat.tasks;
+  if(arr.length === 0){
+      $('#mini-task-container').append("<br><br><u>No data.</u>")
+      return true;
+  }
   for(let i in arr){
     let data = arr[i];
     if(mode === data.status+1)
