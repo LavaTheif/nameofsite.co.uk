@@ -22,8 +22,8 @@ async function loadData(){
 
 async function openTask(id){
   let taskData = await get('subtasks');
-  $('#task-name').val(taskData.tasks.title).prop('disabled', false);
-  $('#task-desc').val(taskData.tasks.details).prop('disabled', false);
+  $('#task-name').val(taskData.title).prop('disabled', false);
+  $('#task-desc').val(taskData.details).prop('disabled', false);
 
 }
 
