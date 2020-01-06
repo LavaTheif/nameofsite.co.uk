@@ -8,5 +8,4 @@ function load_head() {
 `);
 }
 // document.onloadend = load_head();
-//TODO: make this on page load fin
-setTimeout(load_head, 100);
+$(document).ready(load_head);

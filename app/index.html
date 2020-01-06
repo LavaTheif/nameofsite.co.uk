@@ -5,11 +5,21 @@
   <meta charset="utf-8">
   <title>Home</title>
   <script src="../js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+
   <script src="../js/init_page.js"></script>
   <script src="../js/app/queryAPI.js"></script>
+  <script src="../js/app/utils.js"></script>
   <script src="../js/app/init.js"></script>
+  <script src="../js/app/tasks.js"></script>
+  <script src="../js/app/board.js"></script>
+  <script src="../js/app/categories.js"></script>
+  <script src="../js/app/comments.js"></script>
   <script src="../js/app/listeners.js"></script>
+  <script src="../js/app/keyListeners.js"></script>
   <script src="../js/app/sidebarViewManager.js"></script>
+  <script src="../js/app/contextMenus.js"></script>
 
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/app.css">
@@ -21,6 +31,29 @@
   <![endif]-->
 
   <div id="darken" class="hidden">
+    <div id="sub-task-editor" class="hidden">
+      <div class="inline-flex-cont">
+        <div id="current-task-id" task_id="-1"></div>
+        <div id="subtask-setting-container">
+<!--          TODO: change name, desc, status, due date etc -->
+<!--          <br>Name<br><input id="subtask-name" class="task-name-edit" onfocusout="saveTaskDetails($(this).val())" maxlength="25"><br>-->
+<!--          <br>Description<br><textarea id="subtask-desc" class="task-desc-edit" onfocusout="saveTaskDetails($(this).val())" maxlength="252"></textarea>-->
+          <br>Due Date<br><input type="date" id="subtask-due" class="task-due-edit" onfocusout="">
+        </div>
+        <div id="subtask-message-container">
+          <div id="subtask-messages">
+  <!--          msgs here-->
+          </div>
+          <div id="type-new-message">
+  <!--          <form method="post" enctype="multipart/form-data" action="javascript:console.log">-->
+              <input name="type-msg" id="type-msg">
+              <button onclick="submitComment($('#type-msg').val(), $('#current-task-id').attr('task_id'))">Send</button>
+  <!--          </form>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="message-box hidden" id="message-box-loading">
       Loading...
     </div>
@@ -34,18 +67,13 @@
   <div class="layer-1" id="select-board-menu" style="display: none;">
       <div id="contacts"></div>
       <div id="board-select">
-        <div class="board" id="12345678">
-          <div class="board-icon"></div>
-          <p class="board-name">LavaTheif's Test Board</p>
-        </div>
       </div>
   </div>
-
   <div class="layer-0" style="display: none;" id="tasks-minified-box">
     <div class="container-header">
       <select id="board">
         <option value="0">View: Board Details</option>
-        <option value="1">View: Task List</option>
+        <option value="1">View: Task Categories</option>
         <option value="2">View: Settings</option>
       </select>
       <div class="vertical-divider-full"></div>
@@ -72,12 +100,33 @@
     <div class="spacer" style="margin-top: 0; margin-bottom: 0"></div>
     <div class="sub-container" id="task-info-container">
       <div id="task-details">
-        <br>Name<br><input id="task-name"><br>
-        <br>Description<br><textarea id="task-desc"></textarea>
+        <br>Name<br><input id="task-name" class="task-name-edit" onfocusout="saveCategoryDetails()" maxlength="25"><br>
+        <br>Description<br><textarea id="task-desc" class="task-desc-edit" onfocusout="saveCategoryDetails()" maxlength="252"></textarea>
+        <br>Due Date<br><input type="date" id="task-due" class="task-due-edit" onfocusout="updateDueDate(getUrlTask(), new Date($(this).val()).getTime())">
       </div>
       <div class="vertical-divider"></div>
-      <div id="subtasks"></div>
+      <div id="subtask-container">
+        <div id="subtasks">
+<!--          subtasks here-->
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="hidden" id="shortcut-help">
+    <h2>Shortcut Help Menu</h2>
+    ? -- help menu<br>
+    [esc] -- close help<br>
+    [<--] [-->] -- Navigate board list<br>
+    [enter] -- select a board<br>
+    <br>
+    H -- home<br>
+    L -- Task List<br>
+    //T -> new task<br>
+    //C -> new Category<br>
+    //B -> new board<br>
+    //O -> open calendar<br>
+    <br>
+    //TODO: redesign and reword this
   </div>
 
 <!--  <script>-->

@@ -1,16 +1,14 @@
 .background{
   /*#8dc3ff,*/
   background:
-    /*repeating-linear-gradient(90deg, rgba(210, 236, 255, 0.61) 0px, rgba(45, 218, 255, 0.53) 50px, rgba(0, 155, 255, 0.6) 50px, rgba(65, 248, 255, 0.55) 100px),*/
-    /*repeating-linear-gradient(90deg, #ffffff80 0px, #00e4ff80 25px, #6489d580 50px),*/
-    repeating-linear-gradient(90deg, #00adc980 0px, #06a2cc80 25px, #00aeff80 50px),
-    repeating-linear-gradient(45deg, rgba(0, 133, 255, 0.5) 0%, rgba(0, 255, 246, 0.5) 100%),
-    repeating-linear-gradient(rgba(23, 161, 190, 0.75) 0px, rgba(23, 161, 190, 0.75) 50px, rgba(15, 250, 99, 0.34) 50px, rgba(15, 228, 250, 0.24) 100px),
+    repeating-linear-gradient(90deg, #00adc980 0px, #06a2cc80 25px, #00aeff80 50px, #00adc980 75px),
+    repeating-linear-gradient(45deg, rgba(0, 133, 255, 0.5) 0%, rgba(0, 180, 211, 0.5) 100%),
+    repeating-linear-gradient(rgba(23, 161, 190, 0.75) 0px, rgba(23, 161, 190, 0.75) 50px, rgba(15, 250, 99, 0.34) 50px, rgba(23, 161, 190, 0.75) 100px),
     repeating-linear-gradient(45deg, rgba(15, 55, 190, 0.75) 0px, rgba(15, 55, 250, 0.75) 50px),
     repeating-linear-gradient(-45deg, rgba(5, 0, 255, 0.5) 0px, rgba(15, 55, 250, 0.5) 50px);
   min-width: 750px;
   height: 100%;
-  /*background: #444;*/
+  /*background: linear-gradient(45deg, #8dc3ff, #4396c3);*/
 }
 
 /*head, html{min-width: 470px;}*/

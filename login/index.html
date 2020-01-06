@@ -6,6 +6,8 @@
   <title>Home</title>
   <script src="../js/vendor/jquery-3.4.1.min.js"></script>
   <script src="../js/init_page.js"></script>
+  <script src="../js/app/queryAPI.js"></script>
+  <script src="../js/app/utils.js"></script>
 
   <link rel="stylesheet" href="../css/main.css">
 </head>
@@ -31,12 +33,32 @@
     <h4>Task planner and organiser</h4>
   </div>
   <div id="container-2">
-    <div class="spacer"></div><br><br>
-    TODO: Login
-    TODO: Terms
-    TODO: Privacy Policy
+    <div class="spacer"></div>
+    <input id="username"/><br>
+    <input id="password" type="password"/><br>
+    <button onclick="login()">Login</button>
+    <br>
+    <br>
+    <span style="color:darkred" id="msg"></span>
+    <br>
+    <a href="/signup/">Signup</a>
+    <br>
+    <a href="/terms/">TODO: Terms</a>
+    <br>
+    <a href="/privacy/">TODO: Privacy Policy</a>
   </div>
   <script>
+    async function login(){
+      let username = $('#username').val();
+      let password = $('#password').val();
+      let data = (await get('login', {username: username, password: password}, true));
+      if(data.success){
+        window.location.href = site + "/app/";
+      }else{
+        window.location = site+'/login/?msg='+data.message;
+      }
+    }
+
     $(window).resize(res);
     function res(){
       let c1 = $('#container-2');
@@ -52,6 +74,8 @@
       }
     }
     res();
+
+    $('#msg').html(getUrlMsg()||"");
   </script>
 
 </body>

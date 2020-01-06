@@ -27,14 +27,7 @@ function resetSidebar(){
   if(!getUrlTask())
     updateSidebarView();
   else
-    openTask(getUrlTask());
-}
-
-function saveDetails(){
-  get('updateBoard', {board_id: getUrlID(), board_name: $('#board-name').val(), board_desc: $('#board-desc').val()}).then((data) => {
-    $('#board-name').val(data.board_name);
-    $('#board-desc').val(data.board_desc);
-  })
+    openCategory(getUrlTask());
 }
 
 async function sideBarDetails(){
@@ -58,7 +51,8 @@ async function sideBarDetails(){
 
 function renderSideBarTasks(mode){
   let sidebarViewport = $('#mini-task-container');
-  sidebarViewport.html("<u style='position:sticky;'>Categories</u>");
+  // sidebarViewport.parent().append("<u style='position:sticky;'>Categories</u>");
+  sidebarViewport.html("");
   if(mode === 0){
     let empty = renderSideBarTasksStage(1);
     if(empty)
@@ -89,12 +83,15 @@ function renderSideBarTask(data){
   let sidebarViewport = $('#mini-task-container');
 
   sidebarViewport.append(`
-    <div class="task ${colours[data.status]}" id="${data.task_id}" onclick="openTask('${data.task_id}')">
-    <div class="task-name">${data.title}</div>
-    <div class="task-desc">${data.details}</div>
+    <div class="task ${colours[data.status]}" id="${data.task_id}" onclick="openCategory('${data.task_id}')">
+    <div class="task-name"><b><u>${fullySanitize(data.title)}</u></b></div>
+    <div class="comment-time">Due: ${!data.due_date?"N/A":new Date(Number(data.due_date)).toUTCString().replace(/00\:00.*$/, "")}</div>
+    <div class="task-desc">${fullySanitize(data.details)}</div>
     </div>
     `);
 
+  let category = $('#'+data.task_id);
+  category.contextmenu(categoryContextMenu);
 }
 
 async function sideBarTasks(){
@@ -105,6 +102,6 @@ async function sideBarTasks(){
 
 function sideBarSettings(){
   let sidebarViewport = $('#mini-task-container');
-  sidebarViewport.html("Settings menu")
-
+  sidebarViewport.html("Settings menu");
+  sidebarViewport.append(`<div class="setting-container"><h1 class="setting-text">Open Invites</h1></div>`)
 }

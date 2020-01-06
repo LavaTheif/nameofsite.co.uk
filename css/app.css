@@ -2,25 +2,121 @@ html, body{
   height: 99%;
   width: 99%;
   display: inline-flex;
+  overflow: hidden;
 }
 
-#tasks-minified-box{
+#tasks-minified-box {
   text-align: center;
-  width: 300px;
-  height: calc(100% - 50px - 40px);
   margin: 20px;
   background-color: rgba(127, 175, 229, 0.76);
   margin-top: 70px;
 }
+@media(min-width: 1079px){
+  #tasks-minified-box{
+    width: 300px;
+    height: calc(100% - 50px - 40px);
+  }
+
+  #task-info-box{
+    width: calc(100% - 400px);
+    height: calc(100% - 50px - 40px);
+    margin: 20px;
+    margin-top: 70px;
+  }
+
+  .sub-container{
+    width: 99%;
+  }
+
+  #mini-task-container-cont{
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .task{
+    height: auto;
+  }
+
+  #mini-task-container{
+    display: table;
+  }
+
+}
+@media(max-width: 1079px){
+  #tasks-minified-box{
+    width: calc(100% - 40px);
+    height: 200px;
+  }
+
+  #task-info-box{
+    width: calc(100% - 40px);
+    height: calc(100% - 75px - 220px);
+    max-width: 100%;
+    margin: 20px;
+    margin-top: 0;
+    /*position: relative;*/
+    /*top: 220px;*/
+  }
+
+  body{
+    display: block;
+  }
+
+  #mini-task-container-cont{
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
+  #mini-task-container{
+    display: inline-flex;
+    width: auto;
+  }
+
+  .sub-container{
+    /*width: 99%;*/
+    display: inline-flex;
+  }
+
+  .task{
+    height: 120px;
+    width: 400px;
+    overflow-y: auto;
+  }
+
+  #board-desc{
+    position: absolute;
+    left: 50%;
+    margin-left: -78px;
+    margin-top: 25px;
+  }
+
+  #board-name{
+    height: 20px;
+    position: absolute;
+    left: 50%;
+    margin-left: -78px;
+  }
+
+  #shortcut-help{
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    top: 100px;
+  }
+}
 
 #task-info-box{
   text-align: center;
-  width: calc(100% - 200px - 50px);
-  height: calc(100% - 50px - 40px);
-  margin: 20px;
+  /*width: calc(100% - 200px - 50px);*/
   background-color: rgba(127, 175, 229, 0.75);
-  margin-top: 70px;
 }
+
+.task-desc, .task-name{
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding: 10px;
+}
+
 .container-header{
   height: 20px;
   width: 99%;
@@ -40,13 +136,15 @@ html, body{
 #task-details{
   width: 150px;
 }
-#subtasks{
+#subtask-container{
   width: calc(100% - 150px - 20px);
+  overflow: auto;
 }
 
 input, textarea{
   width: 156px;
   max-width: 156px;
+  min-width: 156px;
   border: none;
   border-radius: 5px;
   background-color: #4396c3;
@@ -64,11 +162,11 @@ textarea{
   width: calc(25% - 20px);
 }
 
-
 .hidden{
   display: none;
 }
 .show{
+  z-index: 100;
   display: block;
 }
 #darken{
@@ -116,20 +214,60 @@ textarea{
   background-color: rgba(127, 175, 229, 0.75);
   margin-top: 70px;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1079px){
+  .board{
+    width: calc(100% - 40px);
+    height: 150px;
+    margin-top: 0;
+  }
+
+  .board-icon {
+    width: 100px;
+    height: 100px;
+    font-size: 25px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .board-name{
+    margin-top: -80px;
+    margin-left: 120px;
+  }
+  .board-desc{
+    display: block;
+  }
+
+}
+
+@media (min-width: 1080px){
+  .board {
+    width: 300px;
+    height: 300px;
+  }
+  .board-icon {
+    width: 75%;
+    height: 75%;
+    font-size: 50px;
+    margin: auto;
+  }
+  .board-desc{
+    display: none;
+  }
 }
 
 .board{
-  width: 300px;
-  height: 300px;
+  margin: 20px;
   background-color: cornflowerblue;
   border-radius: 25px;
   box-shadow: 10px 10px 5px #0006;
-  margin: 20px;
   transition-duration: 0.5s;
   display: inline-block;
 }
-.board:hover{
+.board:hover, .board.hover{
   box-shadow: 5px 5px 5px #0006;
+  border: 2px dashed #484848;
 }
 
 .board:active{
@@ -139,13 +277,18 @@ textarea{
 
 .board-icon{
   background-color: #bbdbf8;
-  width: 75%;
-  height: 75%;
-  margin: auto;
   border-radius: 100%;
-  font-size: 50px;
   overflow-x: hidden;
+}
 
+.board-desc{
+  margin-top: 0px;
+  margin-left: 120px;
+  background-color: #77a1ec;
+  border-radius: 10px;
+  height: 50px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /*.board-icon:before{*/
@@ -158,6 +301,7 @@ textarea{
   overflow-x: -moz-hidden-unscrollable;
   overflow-x: hidden;
   overflow-wrap: break-word;
+  word-break: break-word;
   overflow-y: hidden;
   overflow-y: -moz-hidden-unscrollable;
 }
@@ -168,14 +312,7 @@ select{
   background-color: rgba(0,0,0,0);
 }
 
-#mini-task-container{
-  display: table;
-}
-
 #board-name{
-  /*height: 20px;*/
-  /*width: 100%;*/
-  /*max-width: none;*/
   text-align: center;
 }
 
@@ -184,22 +321,55 @@ select{
   /*max-width: none;*/
 }
 
+#mini-task-container-cont{
+  height: calc(100% - 30px);
+}
+
 .task{
   border-radius: 25px;
-  height: auto;
   min-height: 75px;
   margin: 10px;
   box-shadow: 5px 5px 11px -5px black;
   transition-duration: 0.5s;
 }
-#mini-task-container-cont{
-  overflow-y: auto;
-  height: calc(100% - 30px);
-}
 .task:hover{
   box-shadow: 5px 5px 11px black;
 }
 
+.subtask-box, #subtasks{
+  height: max-content;
+  width: max-content;
+  /*margin-left: 160px;*/
+  display: table;
+  /*border-bottom: 1px solid grey;*/
+}
+
+.subtask{
+  border-radius: 10px;
+  height: auto;
+  width: 160px;
+  /*min-height: 75px;*/
+  /*margin-top: auto;*/
+  /*margin-left: -160px;*/
+  box-shadow: 1px 1px 10px -8px black;
+  transition-duration: 0.5s;
+  opacity: 0.9;
+  font-size: 12px;
+  border: 1px solid gray;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.subtask-spacer{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 2px dashed black;
+}
+.subtask-spacer-block{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid grey;
+}
 
 .task-red{
   background-color: #ff716c;
@@ -209,4 +379,124 @@ select{
 }
 .task-green{
   background-color: #93ff95;
+}
+
+#subtask-hover{
+  width: 160px;
+  min-height: 150px;
+  height: fit-content;
+  /*position: absolute;*/
+  background-color: rgb(7, 164, 230);
+  z-index: 10;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 0 10px 1px #afafaf;
+}
+
+#shortcut-help{
+  width: 500px;
+  margin-top: 75px;
+  margin-bottom: 25px;
+  height: auto;
+  background-color: #77a1ec;
+}
+
+.context-menu{
+  text-align: center;
+  width: 150px;
+  height: auto;
+  background-color: #bbdbf8;
+  position: absolute;
+  border-radius: 5px;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+.context-menu-elm{
+  width: 150px;
+  height: 25px;
+  border-radius: 5px;
+  border-bottom: 1px solid black;
+}
+
+.context-menu-elm:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+
+.setting-container{
+  width: 300px;
+  height: 200px;
+}
+
+.setting-text{
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+#sub-task-editor{
+  width: 75%;
+  background-color: #4396c3;
+  height: 80%;
+  position: absolute;
+  left: calc(25% / 2);
+  top: 10%;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.inline-flex-cont{
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+}
+
+#subtask-setting-container{
+  width: 66%;
+  height: 100%;
+  overflow: auto;
+}
+
+#subtask-message-container{
+  width: 33%;
+  min-width: 200px;
+  height: 100%;
+  border-left: 1px solid black;
+}
+#subtask-messages{
+  overflow-y: auto;
+  height: calc(100% - 50px);
+  border-bottom: 1px solid black;
+}
+#type-new-message{
+  display: inline-flex;
+}
+
+.comment{
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid grey;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: grid;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.comment-name{
+  left: 0;
+}
+.comment-time{
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+#type-msg{
+  width: calc(100% - 90px);
+  min-width: 50px;
+  max-width: none;
+  background-color: rgba(0,0,0,0.05);
 }

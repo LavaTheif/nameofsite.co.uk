@@ -6,6 +6,8 @@
   <title>Home</title>
   <script src="../js/vendor/jquery-3.4.1.min.js"></script>
   <script src="../js/init_page.js"></script>
+  <script src="../js/app/queryAPI.js"></script>
+  <script src="../js/app/utils.js"></script>
 
   <link rel="stylesheet" href="../css/main.css">
 </head>
@@ -30,17 +32,39 @@
     <h1 style="text-shadow: 0 0 15px gainsboro">[NAME OF SITE]</h1>
     <h4>Task planner and organiser</h4>
   </div>
-  <div id="container-1">
+  <div id="container-2">
     <div class="spacer"></div>
-    [Name of site] is a website that aims to help you organise your tasks.  We offer a simple solution to storing and managing tasks that must be completed.
+    <input id="username"/><br>
+    <input id="password" type="password"/><br>
+    <button onclick="login()">Signup</button>
+    <br>
+    <br>
+    <span style="color:darkred" id="msg"></span>
+    <br>
+    <a href="/login/">Have an account? Login.</a>
+    <br>
+    <a href="/terms/">Terms</a>
+    <br>
+    <a href="/privacy/">Privacy Policy</a>
   </div>
   <script>
+    async function login(){
+      let username = $('#username').val();
+      let password = $('#password').val();
+      let data = (await get('signup', {username: username, password: password}, true));
+      if(data.success){
+        window.location.href = site + "/app/";
+      }else{
+        window.location = site+'/signup/?msg='+data.message;
+      }
+    }
+
     $(window).resize(res);
     function res(){
-      let c1 = $('#container-1');
+      let c1 = $('#container-2');
       let c2 = $('#container-1-top');
       c1.css('margin-left','calc(50% - (750px / 2))');
-      // console.log(c1.css('margin-left'))
+      // console.log(c1.css('margin-left'));
       if(Number(c1.css('margin-left').replace("px","")) < 0){
         c1.css('margin-left',0);
         c2.css('margin-left',0);
@@ -50,6 +74,8 @@
       }
     }
     res();
+
+    $('#msg').html(getUrlMsg()||"");
   </script>
 
 </body>
