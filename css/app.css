@@ -500,3 +500,12 @@ select{
   max-width: none;
   background-color: rgba(0,0,0,0.05);
 }
+
+#calendar-container{
+  width: min-content;
+  background-color: #aaa;
+  left: 50%;
+  margin-left: calc(-716px / 2);
+  position: absolute;
+  top: 5%;
+}
