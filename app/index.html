@@ -16,6 +16,7 @@
   <script src="../js/app/board.js"></script>
   <script src="../js/app/categories.js"></script>
   <script src="../js/app/comments.js"></script>
+  <script src="../js/app/calendar.js"></script>
   <script src="../js/app/listeners.js"></script>
   <script src="../js/app/keyListeners.js"></script>
   <script src="../js/app/sidebarViewManager.js"></script>
@@ -31,6 +32,40 @@
   <![endif]-->
 
   <div id="darken" class="hidden">
+    <div id="calendar-container" class="hidden">
+      <style>
+        .calendar{
+          width: 714px;
+          height: auto;
+          display: inline-table;
+          border: solid 1px gray;
+        }
+        .day{
+          border: solid 1px black;
+          width: 100px;
+          height: 100px;
+          display: inline-grid;
+          text-align: center;
+        }
+        .bar{
+          height: 25px;
+          text-align: center;
+          background-color: #e2e2e2;
+          width: 100px;
+          border: solid 1px black;
+          display: inline-grid;
+        }
+      </style>
+      <div class="calendar"></div>
+      <script>
+        let date = new Date();
+        let dispMonth = date.getMonth();
+        let dispYear = date.getYear()+1900;
+        let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        setDisplay(date.getMonth(), date.getYear()+1900);
+      </script>
+    </div>
+
     <div id="sub-task-editor" class="hidden">
       <div class="inline-flex-cont">
         <div id="current-task-id" task_id="-1"></div>

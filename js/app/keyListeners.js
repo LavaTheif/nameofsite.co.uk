@@ -11,11 +11,15 @@ function openShortcutHelp(){
 function closeShortcutHelp(){
     let elm = $('#shortcut-help');
     let elm2 = $('#sub-task-editor');
+    let elm3 = $('#calendar-container');
     let darken = $('#darken');
     if(elm.hasClass('show'))
         elm.removeClass('show').addClass('hidden');
     else if(elm2.hasClass('show')){
         elm2.removeClass('show').addClass('hidden');
+        darken.removeClass('show').addClass('hidden');
+    }else if(elm3.hasClass('show')){
+        elm3.removeClass('show').addClass('hidden');
         darken.removeClass('show').addClass('hidden');
     }
     else
@@ -77,7 +81,7 @@ setInterval(function(){
         updateSidebarView();//open it
 
     }else if(isActionable('O')){//Open calendar
-        //TODO: open calendar
+        loadCalendar();
 
     }else if(isActionable('B')){//Create new board
         createBoard();
