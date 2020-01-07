@@ -1,6 +1,7 @@
 function loadCalendar(){
     $('#calendar-container').removeClass('hidden').addClass('show');
     $('#darken').removeClass('hidden').addClass('show');
+    setDisplay(dispMonth, dispYear);
 }
 function daysInMonth (month, year) {
     return new Date(year, month+1, 0).getDate();
@@ -111,12 +112,3 @@ function setDisplay(month, year) {
     }
 
 }
-
-//IF(due_date === currently rendering day)
-//      Add a circle with colour of "status" to the elm
-
-//DATA:
-let a = {"exists":true,"tasks":[{"board_id":"eaaa5e12","is_top":true,"root_node_id":"8315231445","task_id":"8315231445","details":"Create the settings menus and databases","due_date":null,"parent_id":null,"status":1,"title":"Settings"},{"board_id":"eaaa5e12","is_top":true,"root_node_id":"8315326618","task_id":"8315326618","details":"Allow users to be invited to boards to work together","due_date":null,"parent_id":null,"status":0,"title":"Colaboration"},{"board_id":"eaaa5e12","is_top":true,"root_node_id":"8315522080","task_id":"8315522080","details":"-","due_date":null,"parent_id":null,"status":0,"title":"Set up servers and push"},{"board_id":"eaaa5e12","is_top":true,"root_node_id":"8317180897","task_id":"8317180897","details":"-","due_date":null,"parent_id":null,"status":1,"title":"Login and signup pages"},{"board_id":"eaaa5e12","is_top":true,"root_node_id":"8429355292","task_id":"8429355292","details":"Calendar.","due_date":"1578441600000","parent_id":null,"status":1,"title":"Calendar"},{"board_id":"eaaa5e12","is_top":true,"root_node_id":"8433792433","task_id":"8433792433","details":"-","due_date":null,"parent_id":null,"status":2,"title":"Comments fs8dg9fbvf"}],"id":"eaaa5e12"}
-let b = {"8429355292":{"details":"Calendar.","title":"Calendar","is_top":true,"task_id":"8429355292","status":1,"parent_id":null,"due_date":"1578441600000"},"8538905000":{"details":"-","title":"Unnamed Task","is_top":false,"task_id":"8538905000","status":1,"parent_id":"8429355292","due_date":"1578441600000"}}
-saveSess('taskDat', a);
-saveSess('subTaskDat', b);
