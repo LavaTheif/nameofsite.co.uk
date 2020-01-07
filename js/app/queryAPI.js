@@ -5,7 +5,7 @@
 // let site = "http://:8080/nameofsite.co.uk";
 
 let site = "http://nameofsite.co.uk/"
-let url = "172.31.26.183:8079";
+let url = "52.56.232.106:8079";
 
 async function get(dat, send, bypassSuccessCheck) {
   let data;
