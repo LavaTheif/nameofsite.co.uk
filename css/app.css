@@ -509,3 +509,10 @@ select{
   position: absolute;
   top: 5%;
 }
+
+.blob{
+    width:15px;
+    height:15px;
+    border-radius: 100px;
+    margin: 0;
+}
