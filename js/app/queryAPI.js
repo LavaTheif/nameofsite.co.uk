@@ -4,8 +4,8 @@
 //let url = "http://192.168.0.60:8079";
 // let site = "http://:8080/nameofsite.co.uk";
 
-let site = "http://nameofsite.co.uk/"
-let url = "52.56.232.106:8079";
+let site = "http://nameofsite.co.uk"
+let url = "http://52.56.232.106:8079";
 
 async function get(dat, send, bypassSuccessCheck) {
   let data;
